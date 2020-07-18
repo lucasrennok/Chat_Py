@@ -18,7 +18,6 @@ def sending():
     global received
     while(sent!='0' and received!='0'):
         sent = input("")
-        #print("Me: ", sent)
         instance.any_send_mesage(sent)
 
 choose = input("1-Server\n Any-Client\n")
@@ -46,4 +45,3 @@ while(t1.is_alive() and t2.is_alive()):
     time.sleep(1)
 
 print("\nChat ended.")
-
