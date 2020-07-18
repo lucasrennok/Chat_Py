@@ -21,7 +21,7 @@ def sending():
         instance.any_send_mesage(sent)
 
 choose = input("1-Server\n Any-Client\n")
-max_connections = 3
+max_connections = 2
 max_bytes = 1024
 port = 1502
 host = ""
