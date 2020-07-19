@@ -14,9 +14,15 @@ The same as the first version, but there is the "online" class that can do all t
 To use: *python main.py* and you decide if you want to be the server or the client.
 
 ## V3
-This version uses threads to receive and send mesages at the same time.
+This version uses threads to receive and send mesages at the same time. It works to a private chat(with only 2 people).
 
 To use: *python main.py* and you decide if you want to be the server or the client. 
+
+## V4
+This version uses threads to receive and send mesages at the same time. It works to a group of friends or a private chat.
+It uses a server to receive the mesages and send to all the people connected. The people can leave the server whatever they want, typing '0'.
+
+To use: *python main_client.py* to connect to a server or *python main_server.py* to create a server.
 
 ## To End the Connection
 Type '0' and press Enter. In version V3 after someone send '0' the other one has only one mesage left (because the threads are waiting for an input(at one node) and for a mesage(at the other node)).
