@@ -24,7 +24,5 @@ It uses a server to receive the mesages and send to all the people connected. Th
 
 To use: *python main_client.py* to connect to a server or *python main_server.py* to create a server.
 
-OBS.: THE V4 IS NOT RUNNING CORRECTLY, ONLY ONE PERSON CAN CONNECT TO THE SERVER AND THE SERVER CAN ONLY SEND MESAGES TO THE FIRST PERSON WHO CONNECTED. I will fix it soon.
-
 ## To End the Connection
 Type '0' and press Enter. In version V3 after someone send '0' the other one has only one mesage left (because the threads are waiting for an input(at one node) and for a mesage(at the other node)).
