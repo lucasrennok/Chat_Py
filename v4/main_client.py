@@ -12,18 +12,20 @@ def receiveMesage():
     global client_socket
     global HOST_SERVER
     global mesage
+    buffer_history = ""
     timer = 0
     while(1):
         if(mesage=='0'):
             break
         elif(timer%5==0):
-            print(timer)
             timer=0
             msg = ""
             client_socket.sendto(msg.encode(), (HOST_SERVER,1500)) 
             buffer,server = client_socket.recvfrom(2048)
-            print(buffer.decode())
-            print(">--------<")
+            if(buffer.decode()!=buffer_history):
+                print(buffer.decode())
+                print(">--------<")
+            buffer_history = buffer.decode()
         time.sleep(1)
         timer+=1
 
