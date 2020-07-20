@@ -56,4 +56,7 @@ while(chat_cancel==False):
 
 print("\n\n** Server Closed **")
 
+print("\nClosing in 5 secs...")
+time.sleep(5)
+
 server_socket.close()
