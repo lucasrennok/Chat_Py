@@ -7,6 +7,7 @@ mesage = ""
 name = input("What's your name?\n> ")
 HOST_SERVER = input("Server: ")
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+print("\n--If you want to close the chat: Type \'0\' and Enter.--\n")
 
 def receiveMesage():
     global client_socket
@@ -14,13 +15,11 @@ def receiveMesage():
     global mesage
     buffer_history = ""
     timer = 0
-    while(1):
-        if(mesage=='0'):
-            break
-        elif(timer%5==0):
+    while(mesage!='0'):
+        if(timer%5==0):
             timer=0
             msg = ""
-            client_socket.sendto(msg.encode(), (HOST_SERVER,1500)) 
+            client_socket.sendto(msg.encode(), (HOST_SERVER,1500))
             buffer,server = client_socket.recvfrom(2048)
             if(buffer.decode()!=buffer_history):
                 print(buffer.decode())
@@ -40,7 +39,9 @@ while(mesage!='0'):
     if(mesage=='0'):
         break
     mesage=name+": "+mesage
-    client_socket.sendto(mesage.encode(),(HOST_SERVER,1500)) 
+    client_socket.sendto(mesage.encode(),(HOST_SERVER,1500))
 client_socket.sendto(left.encode(),(HOST_SERVER,1500))
+
+print("Closing Chat")
 
 client_socket.close()
