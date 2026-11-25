@@ -1,27 +1,48 @@
-# :floppy_disk: Chat
+# :speech_balloon: Chat_Py
 
-Versions of a chat in python. I think all these versions are interesting to keep here, due to they have their differences and are good at specific moments.
+Chat em grupo por linha de comando, em Python puro (só a biblioteca padrão).
+Um servidor TCP recebe as mensagens e repassa para todos os clientes
+conectados.
 
-## :arrow_forward: V1
-Simple Version. The server receive and client send and after client receive and server send.
+Projeto de estudo de sockets. As quatro versões antigas (v1–v4) foram
+substituídas por esta, que reúne o melhor delas: chat em grupo com threads e
+enquadramento de mensagens.
 
-> To use: *python simple_client.py* or *python simple_server.py*, it depends if you want to host or not and if you want to be the first to send a mesage.
+## :rocket: Como usar
 
-## :arrow_forward: V2
-The same as the first version, but there is the "online" class that can do all the process of receiving and sending a mesage.
+Precisa de Python 3.10+.
 
-> To use: *python main.py* and you decide if you want to be the server or the client.
+**1. Inicie o servidor** (na máquina que vai hospedar):
 
-## :arrow_forward: V3
-This version uses threads to receive and send mesages at the same time. It works to a private chat(with only 2 people).
+```sh
+python server.py                 # escuta em 0.0.0.0:1500
+python server.py --port 5000
+```
 
-> To use: *python main.py* and you decide if you want to be the server or the client. 
+**2. Conecte os clientes** (em qualquer máquina que alcance o servidor):
 
-## :arrow_forward: V4
-This version uses threads to receive and send mesages at the same time. It works to a group of friends or a private chat.
-It uses a server to receive the mesages and send to all the people connected. The people can leave the server whatever they want, typing '0'.
+```sh
+python client.py --host IP_DO_SERVIDOR
+python client.py --host 192.168.0.10 --port 1500 --name Lucas
+```
 
-> To use: *python main_client.py* to connect to a server or *python main_server.py* to create a server.
+Digite e aperte Enter para enviar. Para sair, digite `0` e Enter (ou Ctrl+C).
 
-## :no_entry: To End the Connection
-Type '0' and press Enter. In version V3 after someone send '0' the other one has only one mesage left (because the threads are waiting for an input(at one node) and for a mesage(at the other node)).
+Para testar na mesma máquina, rode o servidor e abra dois terminais com
+`python client.py --host 127.0.0.1`.
+
+## :package: Arquivos
+
+| Arquivo | Função |
+| --- | --- |
+| `server.py` | Servidor: aceita conexões e repassa as mensagens |
+| `client.py` | Cliente: uma thread recebe, a principal envia |
+| `protocol.py` | Enquadramento das mensagens (prefixo de tamanho + UTF-8) |
+
+## :mag: O que mudou em relação às versões antigas
+
+- **Chat em grupo** com repasse do servidor para todos (as v1–v3 eram ponto a ponto)
+- **Enquadramento de mensagens**: cada mensagem leva o tamanho no cabeçalho,
+  então não há mais mensagens cortadas ou grudadas (problema comum em TCP)
+- Entradas e saídas anunciadas para todos, com desconexão tratada sem travar
+- Host e porta por argumentos de linha de comando, sem variáveis globais
